@@ -14,8 +14,10 @@
 {
 position: relative;
 height: 40vh;
-width: 90vw;
-background-color:red;
+width: 50vw;
+align.center;
+
+
 
 
 }
@@ -23,7 +25,7 @@ background-color:red;
 {
  color: rgb(204, 61, 61);
     position: absolute;
-    top: 82%;
+    top: 85%;
     left: 20%;
     transform: translate(-50%, -50%);
 }
