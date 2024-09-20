@@ -1,3 +1,4 @@
+package com.example.demo;
 
 import com.example.demo.JournalEntry;
 import com.example.demo.JournalRepository;
