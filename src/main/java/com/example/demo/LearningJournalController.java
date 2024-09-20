@@ -10,6 +10,7 @@ import java.util.List;
 
 @Controller
 public class LearningJournalController {
+    public Journal personJson(){
 
     @Autowired
     private JournalService journalService;
@@ -21,3 +22,4 @@ public class LearningJournalController {
     }
 
 }
+//Endpunkte für datenbank
