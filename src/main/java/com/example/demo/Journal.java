@@ -29,4 +29,3 @@ public class Journal{
     private String tags;
 
 }
-
