@@ -25,7 +25,6 @@ public class JournalService {
         updatedEntry.setId(id);
         return journalRepository.save(updatedEntry);
     }
-    return null;
 
 public void deleteEntry(Long id){
     JournalRepository.deleteById(id);
