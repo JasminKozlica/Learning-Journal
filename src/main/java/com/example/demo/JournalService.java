@@ -14,7 +14,7 @@ public class JournalService {
     private JournalRepository journalRepository;
 
 
-    public Journal createJournalEntry(Journal journal) {
+    public Journal createJournal(Journal journal) {
 //        journal.setDate(LocalDate.now());
         return journalRepository.save(journal);
     }
@@ -39,15 +39,12 @@ public class JournalService {
         return journalRepository.findByTags(tags);
     }
 
-    public Journal updateJournal(Long entryId, Journal updatedJournal) {
-        return journalRepository.findById(entryId)
-                .map(journal -> {
-                    journal.setCategory(updatedJournal.getCategory());
-                    journal.setDate(updatedJournal.getDate());
-                    journal.setTags(updatedJournal.getTags());
-                    return journalRepository.save(journal);
-                })
-                .orElseThrow(() -> new RuntimeException("Journal not found"));
+    public Journal updateJournal(Journal updatedJournal) {
+        if (journalRepository.existsById(updatedJournal.getEntryId())) {
+            return journalRepository.save(updatedJournal);
+        } else {
+            throw new RuntimeException("Journal not found");
+        }
     }
 
     public void deleteJournal(Long entryId){
