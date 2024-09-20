@@ -16,10 +16,11 @@ public class JournalEntry {
     @Id
             @GeneratedValue(strategy= GenerationType.IDENTITY)
             @Column(name = "id")
-    Integer entryId ;
-    LocalDate date;
-    String content;
-    String tags;
+    private Long id;
+    private String title;
+    private String content;
+    private String category;
+    private String tags;
 
 }
 

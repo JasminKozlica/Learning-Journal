@@ -1,15 +1,25 @@
 package com.example.demo;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import lombok.*;
+import org.springframework.data.annotation.Id;
 
+import java.time.LocalDate;
+@Entity
 @Getter
 @Setter
 @Builder
-public class Journal {
-    private Long id;
-    private String name;
-
+@NoArgsConstructor
+@AllArgsConstructor
+public class Journal{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "entryID")    private Long entryId;
+    @Column(name = "date")    private LocalDate date;
+    @Column(name = "content")    private String content;
+    @Column(name = "catagory")    private String category;
+    @Column(name = "tags")    private String tags;
 }
-
