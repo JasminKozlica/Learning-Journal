@@ -20,5 +20,4 @@ public class LearningJournalController {
         return journalService.getAllEntries();
     }
 
-   // @GetMapping(value = "/journal/")
 }

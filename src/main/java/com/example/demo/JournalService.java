@@ -26,12 +26,12 @@ public class JournalService {
     }
 
     public Journal updateEntry(Long id, Journal updatedEntry) {
-        updatedEntry.setEntryId(id);
+        updatedEntry.setId(id);
         return journalRepository.save(updatedEntry);
     }
 
     public void deleteEntry(Long id) {
-        JournalRepository.deleteById(id);
+        journalRepository.deleteById(id);
 
     }
 
