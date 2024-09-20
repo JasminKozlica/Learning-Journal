@@ -13,6 +13,6 @@ public interface JournalRepository extends JpaRepository<Journal,Long> {
     Optional<Journal> findById(Long entryId);
     List<Journal> findByDate(LocalDate date);
     List<Journal> findByTags(String tags);
-    Optional<Journal> deleteJournal(Long entryId);
+   void deleteJournal(Long entryId);
 
 }
