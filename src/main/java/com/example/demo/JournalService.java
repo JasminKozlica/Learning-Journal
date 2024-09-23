@@ -15,17 +15,18 @@ public class JournalService {
 
 
     public Journal createJournalEntry(Journal journal) {
-//        journal.setDate(LocalDate.now());
+       journal.setDate(LocalDate.now());
         return journalRepository.save(journal);
     }
 
-<<<<<<< HEAD
-    public List<Journal> getAllJournals() {
+
+    public List<Journal> getAllJournalEntries() {
         return journalRepository.findAll();
     }
 
     public Optional<Journal> getJournalById(Long entryId) {
-        return journalRepository.findById(entryId);
+        return Optional.ofNullable(journalRepository.findById(entryId)
+                .orElseThrow(() -> new RuntimeException("Journal entry not found with id: " + entryId)));
     }
 
     public List<Journal> getJournalByCategory(String category) {
@@ -50,26 +51,8 @@ public class JournalService {
                 })
                 .orElseThrow(() -> new RuntimeException("Journal not found"));
     }
-
-    public void deleteJournal(Long entryId){
-        journalRepository.deleteById(entryId);
-    }
-=======
-    public Optional<Journal> getEntryById(Long id) {
-        return journalRepository.findById(id);
-    }
-
-    public Journal updateEntry(Long id, Journal updatedEntry) {
-        updatedEntry.setEntryId(id);
-        return journalRepository.save(updatedEntry);
-    }
-
     public void deleteEntry(Long id) {
         journalRepository.deleteById(id);
     }
 
-    public List<Journal> getAllEntries() {
-        return journalRepository.findAll();
-    }
->>>>>>> 2b039ca (jurnal Controller added,datenbank user and journal added,code clean)
 }

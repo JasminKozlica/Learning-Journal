@@ -17,11 +17,11 @@ public class LearningJournalController {
         this.journalService = journalService;
     }
 
-    @GetMapping(value = "/journal")
-    @ResponseBody
+   @GetMapping(value = "/journal")
+   @ResponseBody
     public List<Journal> getJournal() {
-        return journalService.getAllEntries();
-    }
+       return journalService.getAllJournalEntries();
+   }
 
 }
 

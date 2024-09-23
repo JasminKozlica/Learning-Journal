@@ -15,17 +15,17 @@ public class JournalController {
 
     @PostMapping
     public Journal createJournal(@RequestBody Journal journal) {
-        return journalService.createJournal(journal);
+        return journalService.createJournalEntry(journal);
     }
 
     @GetMapping("/{id}")
     public Optional<Journal> getEntryById(@PathVariable Long id) {
-        return journalService.getEntryById(id);
+        return journalService.getJournalById(id);
     }
 
     @PutMapping("/{id}")
     public Journal updateEntry(@PathVariable Long id, @RequestBody Journal updatedEntry) {
-        return journalService.updateEntry(id, updatedEntry);
+        return journalService.updateJournal(id, updatedEntry);
     }
 
     @DeleteMapping("/{id}")
@@ -35,6 +35,6 @@ public class JournalController {
 
     @GetMapping
     public List<Journal> getAllEntries() {
-        return journalService.getAllEntries();
+        return journalService.getAllJournalEntries();
     }
 }

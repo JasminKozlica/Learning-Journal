@@ -14,5 +14,22 @@
     </div>
 </header>
 
+<form th:action="@{/}" th:object="${journal}" method="post">
+    <label for="content">Journal Content:</label>
+    <input type="text" id="content" th:field="*{content}" placeholder="Enter content">
+    <br/>
+
+    <label for="category">Category:</label>
+    <input type="text" id="category" th:field="*{category}" placeholder="Enter category">
+    <br/>
+
+    <label for="tags">Tags:</label>
+    <input type="text" id="tags" th:field="*{tags}" placeholder="Enter tags (comma-separated)">
+    <br/>
+
+    <!-- Date is automatically set, no need to include in the form -->
+
+    <button type="submit">Submit</button>
+</form>
 </body>
 </html>x

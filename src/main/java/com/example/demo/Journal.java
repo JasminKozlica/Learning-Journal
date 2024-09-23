@@ -2,7 +2,6 @@ package com.example.demo;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 @Entity
@@ -16,9 +15,9 @@ import java.time.LocalDate;
 public class Journal{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "entryID")
+    @Column(name = "entryId")
     private Long entryId;
-    @Column(name = "date")
+    @Column(name = "datum")
     private LocalDate date;
     @Column(name = "content")
     private String content;
