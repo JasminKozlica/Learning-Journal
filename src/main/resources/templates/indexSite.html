@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Learning com.example.demo.Journal</title>
     <style>
-        body{
-        margin:0;
-
-        }
 .titel-image
 {
     height:30vh;
@@ -21,13 +16,7 @@
     filter: opacity(70%);
 
 }
-.title-container
-{
-position: relative;
-height: 40vh;
-width: 50vw;
-align.center;
-}
+
 .titel-text
 {
  color: rgb(204, 61, 61);
@@ -36,19 +25,13 @@ align.center;
     left: 20%;
     transform: translate(-50%, -50%);
 }
-        .journalContent{
-  margin: 21%;
-        margin-top: 1%;
-        margin-right: 21%;
-        margin-bottom: 1%;
-        margin-left: 21%;
-  padding: 16%;
-        padding-top: 16%;
-         padding-right: 16%;
-        padding-bottom: 16%;
-        padding-left: 16%;
-
-        }
+    .journalContent {
+  margin: 2%;
+  padding: 2%;
+  background-color: rgb(255, 224, 184);
+  color: white;
+  border-radius: 5px;
+}
 
 .journalCategory{
 
@@ -71,25 +54,26 @@ align.center;
 </head>
 <body>
 <header>
-    <div class="title-container">
+    <div >
         <img src="https://quickerthanthoughtortime.wordpress.com/wp-content/uploads/2018/10/journal.jpg" class="titel-image" alt="Random cover photo/photo change pending">
-        <h1 class ="titel-text">My Journals</h1>
+
     </div>
     <br>
 </header>
 
 <form th:action="@{/}" th:object="${journal}" method="post">
 
-    <label class="journalCategory"for="category">Category:</label>
+    <label class="journalCategory"for="category"></label>
     <input type="text" id="category" th:field="*{category}" placeholder="Enter category">
+
     <br/>
 
     <br>
-    <label  for="content">Journal Content:</label>
-    <input class="journalContent" type="text" id="content" th:field="*{content}" placeholder="Enter content">
+    <label  for="content"></label>
+    <input  type="text" id="content" th:field="*{content}" placeholder="Enter content">
     <br/>
     <br>
-    <label class="journalClass"for="tags">Tags:</label>
+    <label class="journalClass"for="tags"></label>
     <br>
     <input type="text" id="tags" th:field="*{tags}" placeholder="Enter tags">
     <br/>
@@ -100,7 +84,7 @@ align.center;
 </form>
 <br>
 <section>
-<a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+<a th:href="@{/allJournals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
     Go to all your Journal Entries
 </a>
 </section>

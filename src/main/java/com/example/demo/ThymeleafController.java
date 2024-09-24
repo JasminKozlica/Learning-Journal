@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +23,15 @@ public class ThymeleafController {
         }
         @PostMapping("/")
     public String submitJournalForm(@ModelAttribute Journal journal,Model model){
+            journalService.insertEntry(journal);
         model.addAttribute("journal",journal);
         return "confirmation";
         }
-    @GetMapping("/journals")
+
+    @GetMapping("/allJournals")
     public String getAllJournals(Model model){
         List<Journal>journalEntries=journalService.getAllJournalEntries();
-        model.addAttribute("journal",journalEntries);
+        model.addAttribute("journals",journalEntries);
         return "allJournalEntries";
     }
     }

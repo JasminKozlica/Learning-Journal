@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Journal{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "entryId")
+    @Column(name = "entryid")
     private Long entryId;
     @Column(name = "datum")
     private LocalDate date;

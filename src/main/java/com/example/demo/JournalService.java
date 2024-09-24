@@ -17,7 +17,7 @@ public class JournalService {
     private JournalRepository journalRepository;
 
 
-    public Journal createJournalEntry(Journal journal) {
+    public Journal insertEntry(Journal journal) {
        journal.setDate(LocalDate.now());
         return journalRepository.save(journal);
     }
