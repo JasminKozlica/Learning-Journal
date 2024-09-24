@@ -3,8 +3,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="Styles.css">
     <title>Learning com.example.demo.Journal</title>
+    <style>
+        body{
+        margin:0;
+
+        }
+.titel-image
+{
+    height:30vh;
+    width:100vw;
+    object-fit:cover;
+    filter:invert(0.30);
+    filter: brightness(0.1);
+    filter: saturate(1);
+    filter: blur(0.0rem);
+    filter: opacity(70%);
+
+}
+.title-container
+{
+position: relative;
+height: 40vh;
+width: 50vw;
+align.center;
+}
+.titel-text
+{
+ color: rgb(204, 61, 61);
+    position: absolute;
+    top: 85%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+        .journalContent{
+  margin: 21%;
+        margin-top: 1%;
+        margin-right: 21%;
+        margin-bottom: 1%;
+        margin-left: 21%;
+  padding: 16%;
+        padding-top: 16%;
+         padding-right: 16%;
+        padding-bottom: 16%;
+        padding-left: 16%;
+
+        }
+
+.journalCategory{
+
+        margin-top: 1%;
+        margin-right: 21%;
+        margin-bottom: 1%;
+        margin-left: 21%;
+
+        padding-top: 16%;
+         padding-right: 6%;
+        padding-bottom: 16%;
+        padding-left: 6%;
+
+}
+        .journalClass{
+        margin:10%;
+        padding:10%;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -12,24 +75,34 @@
         <img src="https://quickerthanthoughtortime.wordpress.com/wp-content/uploads/2018/10/journal.jpg" class="titel-image" alt="Random cover photo/photo change pending">
         <h1 class ="titel-text">My Journals</h1>
     </div>
+    <br>
 </header>
 
 <form th:action="@{/}" th:object="${journal}" method="post">
-    <label for="content">Journal Content:</label>
-    <input type="text" id="content" th:field="*{content}" placeholder="Enter content">
-    <br/>
 
-    <label for="category">Category:</label>
+    <label class="journalCategory"for="category">Category:</label>
     <input type="text" id="category" th:field="*{category}" placeholder="Enter category">
     <br/>
 
-    <label for="tags">Tags:</label>
-    <input type="text" id="tags" th:field="*{tags}" placeholder="Enter tags (comma-separated)">
+    <br>
+    <label  for="content">Journal Content:</label>
+    <input class="journalContent" type="text" id="content" th:field="*{content}" placeholder="Enter content">
     <br/>
-
-    <!-- Date is automatically set, no need to include in the form -->
-
-    <button type="submit">Submit</button>
+    <br>
+    <label class="journalClass"for="tags">Tags:</label>
+    <br>
+    <input type="text" id="tags" th:field="*{tags}" placeholder="Enter tags">
+    <br/>
+<br>
+<section>
+    <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Submit</button>
+</section>
 </form>
+<br>
+<section>
+<a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+    Go to all your Journal Entries
+</a>
+</section>
 </body>
-</html>x
+</html>

@@ -10,6 +10,9 @@ import java.util.Optional;
 @Service
 public class JournalService {
 
+
+
+
     @Autowired
     private JournalRepository journalRepository;
 
