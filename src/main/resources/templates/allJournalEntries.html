@@ -7,7 +7,7 @@
 </head>
 <body>
 <header>
-    <h1 class="titel-text">On this Page Yeou can see all Your Journal Entries</h1>
+    <h1 class="titel-text">On this Page You can see all Your Journal Entries </h1>
 </header>
 <h1>All Journal Entries</h1>
 <br>
@@ -27,7 +27,6 @@
     </tr>
     </thead>
     <tbody>
-    <!-- Loop through journal entries -->
     <tr th:each="journal : ${journals}">
         <td th:text="${journal.entryId}"></td>
         <td th:text="${journal.date}"></td>
@@ -39,6 +38,11 @@
             <input type="hidden" name="_method" value="delete"/>
             <button type="submit">Delete</button>
         </form>
+            <br>
+            <form th:action="@{'/journals/' + ${journal.entryId}}" method="get">
+                <input type="hidden" name="_method" value="get"/>
+                <button type="submit">Update</button>
+            </form>
         </td>
     </tr>
     </tbody>

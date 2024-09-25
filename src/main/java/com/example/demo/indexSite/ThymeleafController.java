@@ -1,6 +1,5 @@
-package com.example.demo;
+package com.example.demo.indexSite;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,7 @@ public class ThymeleafController {
         return "confirmation";
     }
 
-    @GetMapping("/allJournals") // /journals
+    @GetMapping("/journals") // /journals
     public String getAllJournals(Model model) {
         List<Journal> journalEntries = journalService.getAllJournalEntries();
         model.addAttribute("journals", journalEntries);
@@ -38,15 +37,19 @@ public class ThymeleafController {
     @DeleteMapping("/journals/{id}") // /journals/{id}
     public String deleteEntry(@PathVariable Long id){
         journalService.deleteEntry(id);
-        return "redirect:/allJournals";
+        return "redirect:/journals";
     }
 
-
-
     @PutMapping("/journals/{id}") // /journals/{id}
-    public String updateEntry(@PathVariable Long id,@ModelAttribute Journal updatedJournal,Model model){
+    public String updateEntry(@PathVariable Long id, @ModelAttribute Journal updatedJournal, Model model){
         journalService.updateJournal(id,updatedJournal);
-        return "updateSuccessView";
+        return "redirect:/journals";
+    }
+
+    @GetMapping("/journals/{id}")
+    public String getJournal(@PathVariable Long id,Model model){
+        model.addAttribute("journal", journalService.getJournalById(id));
+        return "journalUpdateSite";
     }
 }
 
