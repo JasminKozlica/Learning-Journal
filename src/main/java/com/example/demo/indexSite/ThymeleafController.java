@@ -51,6 +51,7 @@ public class ThymeleafController {
         model.addAttribute("journal", journalService.getJournalById(id));
         return "journalUpdateSite";
     }
+
 }
 
 
