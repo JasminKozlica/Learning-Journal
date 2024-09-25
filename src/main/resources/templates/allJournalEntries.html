@@ -10,7 +10,12 @@
     <h1 class="titel-text">On this Page Yeou can see all Your Journal Entries</h1>
 </header>
 <h1>All Journal Entries</h1>
-
+<br>
+<a th:href="@{/}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+    Make new Journal
+</a>
+<br>
+<br>
 <table border="1">
     <thead>
     <tr>
@@ -29,9 +34,18 @@
         <td th:text="${journal.content}"></td>
         <td th:text="${journal.category}"></td>
         <td th:text="${journal.tags}"></td>
+        <td>
+        <form th:action="@{'/journals/' + ${journal.entryId}}" th:method="delete">
+            <input type="hidden" name="_method" value="delete"/>
+            <button type="submit">Delete</button>
+        </form>
+        </td>
     </tr>
     </tbody>
+
 </table>
-<a th:href="@{/}">Go back to Journal page</a>
+<!--<a th:href="@{/}">Go back to Journal page</a>   <&#45;&#45; TODO button für new entry,verbindung mit html.Es sollte am top sein &ndash;&gt;-->
 </body>
 </html>
+<!-- TODO Link für delete Journal "/deleteJournalEntry" -->
+<!-- TODO Link für update Journal "/updateJournalEntry/{id}" -->
