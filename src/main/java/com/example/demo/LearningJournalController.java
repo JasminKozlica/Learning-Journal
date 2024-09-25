@@ -7,5 +7,6 @@ public class LearningJournalController {
 
 
 
+
 }
 //Endpunkte für datenbank
