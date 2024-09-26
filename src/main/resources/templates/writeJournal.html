@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Learning com.example.demo.Journal</title>
+    <title>Learning com.example.demo.indexSite.Journal</title>
     <style>
 .titel-image
 {
@@ -25,9 +25,17 @@
     left: 20%;
     transform: translate(-50%, -50%);
 }
-    .journalContent {
-  margin: 2%;
-  padding: 2%;
+    .content {
+
+    margin-top: 1%;
+    margin-right: 10%;
+    margin-bottom: 1%;
+    margin-left: 10%;
+
+    padding-top: 1%;
+    padding-right: 10%;
+    padding-bottom: 1%;
+    padding-left: 10%;
   background-color: rgb(255, 224, 184);
   color: white;
   border-radius: 5px;
@@ -84,7 +92,7 @@
 </form>
 <br>
 <section>
-<a th:href="@{/allJournals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+<a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
     Go to all your Journal Entries
 </a>
 </section>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update your Journal </title>
+    <style>
+        h1{
+
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{'/journals/' + ${journal.entryId}}" th:object="${journal}" th:method="put">
+
+
+<label class="journalCategory"for="category"></label>
+<input type="text" id="category" th:field="*{category}" placeholder="Enter category">
+
+<br/>
+
+<br>
+<label  for="content"></label>
+<input  type="text" id="content" th:field="*{content}" placeholder="Enter content">
+<br/>
+<br>
+<label class="journalClass" for="tags"></label>
+<br>
+<input type="text" id="tags" th:field="*{tags}" placeholder="Enter tags">
+<br/>
+<br>
+<section>
+  <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Submit</button>
+    <a th:href="@{/allJournalEntries}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Go back</a>
+</section>
+</body>
+</html>

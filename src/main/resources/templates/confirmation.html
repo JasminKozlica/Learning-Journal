@@ -13,10 +13,10 @@
 <p>Tags: <span th:text="${journal.tags}"></span></p>
 
 <form th:action="@{/}" method="get">
-    <button type="Back">Go back to your Journal</button>
+    <button type="Back">Make new Journal </button>
 </form>
 <!--<a th:href="@{/journals}">Here you can see all your Journal Entries</a>-->
-<form th:action="@{/allJournals}" method="get">
+<form th:action="@{/journals}" method="get">
     <button type="submit">Go to all your Journal Entries</button>
 </form>
 
