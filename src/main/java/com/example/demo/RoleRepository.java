@@ -9,6 +9,6 @@ import java.util.Set;
 
 public interface RoleRepository extends JpaRepository <RoleName, Long> {
 
-    Optional<Object> findByUserName(RoleName roleName);
+    Optional<Role> findByUserName(RoleName roleName);
 
 }

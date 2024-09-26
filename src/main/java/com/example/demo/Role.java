@@ -1,4 +1,5 @@
-import com.example.demo.RoleName;
+package com.example.demo;
+
 import jakarta.persistence.*;
 import lombok.*;
 
