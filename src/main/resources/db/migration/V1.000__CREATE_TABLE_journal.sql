@@ -26,3 +26,5 @@ CREATE TABLE journal(
     tags varchar(255),
     CONSTRAINT pk_journal PRIMARY KEY(entryId)
 );
+
+
