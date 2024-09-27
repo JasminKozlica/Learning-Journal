@@ -3,42 +3,37 @@ package com.example.demo;
 
 import com.example.demo.dto.UserDto;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-
 @AllArgsConstructor
+@RestController
 @Controller
+@RequestMapping("/users")
 public class UserController {
-
-    @Autowired
     private  UserService userService;
 
     @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user){
         User savedUser =  userService.createUser(new UserDto());
         return ResponseEntity.ok(savedUser);
-
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<User>> findAll(){
 
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
 
-    @GetMapping("/id")
-    public ResponseEntity<User> findUserById(@PathVariable Long id){
-
-        User user = userService.findUserById(Long id);
-                return ResponseEntity.ok(user);
-    }
+//    @GetMapping("/id")
+//    public ResponseEntity<User> findUserById(@PathVariable Long id){
+//        User user = userService.findUserById(Long id);
+//                return ResponseEntity.ok(user);
+//    }
 
 
     @DeleteMapping("/id")
