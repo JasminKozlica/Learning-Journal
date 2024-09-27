@@ -30,6 +30,7 @@ public class User {
     @Column(name = "feedback")
     private String feedback;
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private RoleName role;
 
 

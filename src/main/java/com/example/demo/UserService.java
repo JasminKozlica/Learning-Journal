@@ -5,17 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.management.relation.Role;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
-public class UserService {
+public class UserService  {
 
     @Autowired
     private  UserRepository userRepository;
-    private  RoleRepository roleRepository;
 
     public User createUser(UserDto newUser){
         User user = User.builder()
@@ -24,10 +21,6 @@ public class UserService {
                 .username(newUser.getName())
                 .password(newUser.getPassword()) // TODO: Hashing des Passwort
                 .build();
-
-        Role studentRole = roleRepository.findByUserName(RoleName.ROLE_STUDENT)
-                .orElseThrow(() ->  new RuntimeException("Role not found"));
-
 
         return userRepository.save(user);
 
@@ -39,7 +32,7 @@ public class UserService {
     }
 
     public Optional<User> findByUserName(String username){
-        return userRepository.findByUserName(username);
+        return userRepository.findByUsername(username);
     }
 
     public List<User> getAllUsers(){

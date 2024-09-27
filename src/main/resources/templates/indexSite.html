@@ -25,22 +25,100 @@
     left: 20%;
     transform: translate(-50%, -50%);
 }
-    .content {
+.content {
 
-    margin-top: 1%;
-    margin-right: 10%;
-    margin-bottom: 1%;
-    margin-left: 10%;
-
-    padding-top: 1%;
-    padding-right: 10%;
-    padding-bottom: 1%;
-    padding-left: 10%;
+   resize: vertical;
   background-color: rgb(255, 224, 184);
-  color: white;
+  color: #111010;
   border-radius: 5px;
 }
+  .category {
 
+  background-color: rgb(255, 224, 184);
+  color: #111010;
+  border-radius: 5px;
+}
+        .tags {
+
+
+  background-color: rgb(255, 224, 184);
+  color: #111010;
+  border-radius: 5px;
+}
+.form-container{
+display: flex;
+  flex-direction: column;
+  width: 50vw;
+}
+        editor-container {
+            background-color: #fff;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        #toolbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: linear-gradient(90deg, #0078d4, #0063b1);
+            border-bottom: 1px solid #ddd;
+            border-radius: 6px 6px 0 0;
+            flex-wrap: wrap;
+        }
+
+        #toolbar button, #toolbar select {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-right: 10px;
+        }
+
+        #toolbar button:hover, #toolbar select:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        #toolbar select {
+            background-color: #0078d4;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        #editor {
+            padding: 15px;
+            margin: 0;
+            min-height: 400px;
+            font-size: 16px;
+            border-radius: 0 0 6px 6px;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+            overflow-y: auto;
+        }
+
+        #editor:focus {
+            outline: none;
+            border-color: #0078d4;
+        }
+
+        .icon-bold:before { content: '𝐁'; }
+        .icon-italic:before { content: '𝐼'; }
+        .icon-underline:before { content: 'U̲'; }
+        .icon-strikethrough:before { content: 'S̶'; }
+        .icon-orderedlist:before { content: '1.'; }
+        .icon-unorderedlist:before { content: '•'; }
+        .icon-undo:before { content: '↺'; }
+        .icon-redo:before { content: '↻'; }
+        .icon-alignleft:before { content: '⬅'; }
+        .icon-aligncenter:before { content: '⬆'; }
+        .icon-alignright:before { content: '➡'; }
 
     </style>
 </head>
@@ -52,34 +130,79 @@
     </div>
     <br>
 </header>
-
-<form th:action="@{/}" th:object="${journal}" method="post">
+<form class="form-container" th:action="@{/}" th:object="${journal}" method="post">
 
     <label class="journalCategory"for="category"></label>
-    <input type="text" id="category" th:field="*{category}" placeholder="Enter category">
+    <input type="text"  class="category"id="category" th:field="*{category}" placeholder="Enter category">
 
-    <br/>
+    <div class="editor-container">
+    <div id="toolbar">
+        <!-- Formatierungsbuttons -->
+        <div class="group">
+            <button class="icon-bold" onclick="execCmd('bold')" title="Fett"></button>
+            <button class="icon-italic" onclick="execCmd('italic')" title="Kursiv"></button>
+            <button class="icon-underline" onclick="execCmd('underline')" title="Unterstreichen"></button>
+            <button class="icon-strikethrough" onclick="execCmd('strikeThrough')" title="Durchgestrichen"></button>
+        </div>
+        <!-- Listen und Ausrichtung -->
+        <div class="group">
+            <button class="icon-orderedlist" onclick="execCmd('insertOrderedList')" title="Nummerierte Liste"></button>
+            <button class="icon-unorderedlist" onclick="execCmd('insertUnorderedList')" title="Aufzählung"></button>
+        </div>
+        <!-- Text-Ausrichtung -->
+        <div class="group">
+            <button class="icon-alignleft" onclick="execCmd('justifyLeft')" title="Linksbündig"></button>
+            <button class="icon-aligncenter" onclick="execCmd('justifyCenter')" title="Zentriert"></button>
+            <button class="icon-alignright" onclick="execCmd('justifyRight')" title="Rechtsbündig"></button>
+        </div>
+        <!-- Schriftgröße und Farbe -->
+        <div class="group">
+            <select onchange="execCmdArg('fontSize', this.value)">
+                <option value="1">Schriftgröße 1</option>
+                <option value="2">Schriftgröße 2</option>
+                <option value="3" selected>Schriftgröße 3</option>
+                <option value="4">Schriftgröße 4</option>
+                <option value="5">Schriftgröße 5</option>
+                <option value="6">Schriftgröße 6</option>
+                <option value="7">Schriftgröße 7</option>
+            </select>
+            <input type="color" onchange="execCmdArg('foreColor', this.value)" title="Textfarbe ändern">
+        </div>
+        <!-- Rückgängig/Wiederholen -->
+        <div class="group">
+            <button class="icon-undo" onclick="execCmd('undo')" title="Rückgängig"></button>
+            <button class="icon-redo" onclick="execCmd('redo')" title="Wiederholen"></button>
+        </div>
+    </div>
 
-    <br>
-    <label  for="content"></label>
-    <input  type="text" id="content" th:field="*{content}" placeholder="Enter content">
-    <br/>
-    <br>
+    <div id="editor" contenteditable="true">
+        Hier kannst du Text eingeben und formatieren...
+    </div>
+</div>
+
+<script>
+    function execCmd(command) {
+        document.execCommand(command, false, null);
+    }
+
+    function execCmdArg(command, arg) {
+        document.execCommand(command, false, arg);
+    }
+</script>
+
     <label class="journalClass"for="tags"></label>
-    <br>
-    <input type="text" id="tags" th:field="*{tags}" placeholder="Enter tags">
-    <br/>
-<br>
+    <input type="text" class="tags" id="tags" th:field="*{tags}" placeholder="Enter tags">
+</form>
 <section>
     <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Submit</button>
 </section>
-</form>
+
 <br>
 <section>
     <br>
-<a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
-    Go to all your Journal Entries
-</a>
+    <a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+        Go to all your Journal Entries
+    </a>
 </section>
 </body>
 </html>
