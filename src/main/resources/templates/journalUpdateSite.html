@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update your Journal </title>
+    <title>Learning Journal</title>
     <style>
         h1{
 
@@ -10,6 +10,8 @@
     </style>
 </head>
 <body>
+<a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Go back</a>
+<br>
 <form th:action="@{'/journals/' + ${journal.entryId}}" th:object="${journal}" th:method="put">
 
 
@@ -30,7 +32,6 @@
 <br>
 <section>
   <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Submit</button>
-    <a th:href="@{/allJournalEntries}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Go back</a>
 </section>
 </body>
 </html>
