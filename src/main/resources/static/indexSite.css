@@ -1,0 +1,8 @@
+/*https://css-tricks.com/snippets/css/a-guide-to-flexbox/*/
+.centeraligned{
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    align-items: center;
+}
+

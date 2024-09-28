@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.indexSite.JournalRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -14,12 +16,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+     @Autowired
+    private UserRepository userRepository;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+//        http.cors().and().csrf().disable(); //wird gebraucht für postman: https://www.postman.com/
 
         // die Reihenfolge der folgenden Zeilen innerhalb von authorizeHttpRequests ist sehr wichtig. Was zuerst kommt, wird nicht mehr überschrieben. D.h. wenn man in der ersten Zeile den Zugang zu bestimmten Seiten ermöglicht oder verbietet, dann wird das keine der kommenden Zeilen mehr ändern können.
         http.authorizeHttpRequests((requests) -> requests
@@ -52,29 +63,41 @@ public class WebSecurityConfig {
     // im folgenden Code erstellen wir hardgecoded zwei User. Einen mit Rolle "USER" und einen mit Rolle "ADMIN", jeweils mit passendem Username und Passwort. Die Rollenbezeichnungen können wir beliebig wählen. Hier können wir zum Rumprobieren User erstellen. Bei einem echten Projekt müssten wir diese Infos in einer Datenbank speichern.
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User
-                .withUsername("Jasmin")
-                .password(passwordEncoder().encode("joe"))
-                .roles("USER")
+        List<com.example.demo.User> allUsers = userRepository.findAll();
+        Collection<UserDetails> allSpringUser = new ArrayList<>();
+        for (com.example.demo.User user:allUsers
+             ) {
+            System.out.println(user.toString());
+            UserDetails value = User
+                .withUsername(user.getUsername())
+                .password(passwordEncoder().encode(user.getPassword()))
+                .roles(RoleName.ROLE_ADMIN.equals(user.getRole().toString())?"ADMIN":"USER")
                 .build();
+            allSpringUser.add(value);
+        }
+//        UserDetails user = User
+//                .withUsername("Jasmin")
+//                .password(passwordEncoder().encode("joe"))
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails admin = User
+//                .withUsername("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("ADMIN")
+//                .build();
+//        UserDetails user1 = User
+//                .withUsername("Nikola")
+//                .password(passwordEncoder().encode("beogradjanin"))
+//                .roles("USER")
+//                .build();
+//        UserDetails user2 = User
+//                .withUsername("Joe")
+//                .password(passwordEncoder().encode("joe"))
+//                .roles("USER")
+//                .build();
 
-        UserDetails admin = User
-                .withUsername("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-        UserDetails user1 = User
-                .withUsername("Nikola")
-                .password(passwordEncoder().encode("beogradjanin"))
-                .roles("USER")
-                .build();
-        UserDetails user2 = User
-                .withUsername("Joe")
-                .password(passwordEncoder().encode("joe"))
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
+        return new InMemoryUserDetailsManager(allSpringUser);
     }
 
     // das brauchen wir auch noch, damit die Passwörter ordentlich gehasht werden beim Erstellen und beim Login

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "appuser")
 @Setter
 @Getter
 @Data
@@ -21,15 +21,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "name")
+    @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
     @Column(name = "email")
     private String email;
-    @Column(name = "feedback")
-    private String feedback;
-    @Column(name = "role")
+//    @Column(name = "feedback")
+//    private String feedback;
+    @Column(name = "userrole")
     @Enumerated(EnumType.STRING)
     private RoleName role;
 
