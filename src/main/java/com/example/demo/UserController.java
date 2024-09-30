@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+
 @AllArgsConstructor
 @Controller
 public class UserController {
@@ -33,7 +34,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<User> findUserById(@PathVariable Long id){
 
         User user = userService.findUserById(Long id);

@@ -5,25 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.management.relation.Role;
-<<<<<<< HEAD
 
 import java.util.List;
 import java.util.Optional;
 
-=======
 import java.util.List;
 import java.util.Optional;
->>>>>>> cfb6c39493d052e7c475db5c639b1a3718b89788
 
 @Service
 public class UserService  {
 
     @Autowired
-<<<<<<< HEAD
     private UserRepository userRepository;
-=======
-    private  UserRepository userRepository;
->>>>>>> cfb6c39493d052e7c475db5c639b1a3718b89788
 
 
     public User createUser(UserDto newUser) {
@@ -34,7 +27,7 @@ public class UserService  {
                 .password(newUser.getPassword()) // TODO: Hashing des Passwort
                 .build();
 
-<<<<<<< HEAD
+
 //        Role studentRole = roleRepository.findByRoleName(RoleName.ROLE_STUDENT)
 //                .orElseThrow(() ->  new RuntimeException("Role Student not found"));
 //
@@ -43,8 +36,6 @@ public class UserService  {
 
 //        user.setRole(RoleName.ROLE_STUDENT);
 
-=======
->>>>>>> cfb6c39493d052e7c475db5c639b1a3718b89788
         return userRepository.save(user);
 
 //       Set<com.example.demo.Role> roles = new HashSet<>();
@@ -54,13 +45,12 @@ public class UserService  {
 
     }
 
-<<<<<<< HEAD
+
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
-=======
-    public Optional<User> findByUserName(String username){
-        return userRepository.findByUsername(username);
->>>>>>> cfb6c39493d052e7c475db5c639b1a3718b89788
+
+
+
     }
 
     public List<User> getAllUsers() {
