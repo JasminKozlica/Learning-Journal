@@ -8,6 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+<<<<<<< HEAD
+import java.util.Optional;
+
+
+=======
+>>>>>>> b4d8b1a360012783ee10b0643241cbb880fe64bf
 @AllArgsConstructor
 @RestController
 @Controller
@@ -29,11 +35,21 @@ public class UserController {
     }
 
 
+<<<<<<< HEAD
+    @GetMapping("/{id}")
+    public ResponseEntity<User> findUserById(@PathVariable Long id){
+
+        Optional<User> user = userService.findUserById(id);
+                return ResponseEntity.ok(user.orElseThrow(()
+                        -> new RuntimeException("User whit ID not found")));
+    }
+=======
 //    @GetMapping("/id")
 //    public ResponseEntity<User> findUserById(@PathVariable Long id){
 //        User user = userService.findUserById(Long id);
 //                return ResponseEntity.ok(user);
 //    }
+>>>>>>> b4d8b1a360012783ee10b0643241cbb880fe64bf
 
 
     @DeleteMapping("/id")

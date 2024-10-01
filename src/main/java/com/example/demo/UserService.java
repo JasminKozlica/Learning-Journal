@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.management.relation.Role;
+<<<<<<< HEAD
+
+=======
+>>>>>>> b4d8b1a360012783ee10b0643241cbb880fe64bf
 import java.util.List;
 import java.util.Optional;
 
@@ -26,13 +30,17 @@ public class UserService {
                 .password(newUser.getPassword()) // TODO: Hashing des Passwort
                 .build();
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> b4d8b1a360012783ee10b0643241cbb880fe64bf
 //        Role studentRole = roleRepository.findByRoleName(RoleName.ROLE_STUDENT)
 //                .orElseThrow(() ->  new RuntimeException("Role Student not found"));
 //
 //        Role adminRole = roleRepository.findByRoleName(RoleName.ROLE_ADMIN)
 //                .orElseThrow(() ->  new RuntimeException("Role Admin not found"));
 
-//        user.setRole(RoleName.ROLE_STUDENT);
+    //     user.setRole(RoleName.ROLE_STUDENT);
 
         return userRepository.save(user);
 
@@ -43,8 +51,17 @@ public class UserService {
 
     }
 
+<<<<<<< HEAD
+
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id);
+
+
+
+=======
     public Optional<User> findUserById(Long id) {
         return userRepository.findUserById(id);
+>>>>>>> b4d8b1a360012783ee10b0643241cbb880fe64bf
     }
         public List<User> getAllUsers () {
             return userRepository.findAll();
