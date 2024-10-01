@@ -5,26 +5,20 @@ import com.example.demo.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-<<<<<<< HEAD
-import java.util.Optional;
-
-
-=======
->>>>>>> b4d8b1a360012783ee10b0643241cbb880fe64bf
-@AllArgsConstructor
-@RestController
 @Controller
+@AllArgsConstructor
 @RequestMapping("/users")
 public class UserController {
     private  UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User savedUser =  userService.createUser(new UserDto(user.getUsername(), user.getEmail(), user.getRole(),user.getPassword()));
-        return ResponseEntity.ok(savedUser);
+    public String createUser(@ModelAttribute User user){
+        User savedUser =  userService.createUser(new UserDto(user.getUsername(), user.getEmail(), RoleName.ROLE_STUDENT,user.getPassword()));
+        return "redirect:/users/signUpConfirm";
     }
 
     @GetMapping("/all")
@@ -34,22 +28,22 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-
-<<<<<<< HEAD
-    @GetMapping("/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable Long id){
-
-        Optional<User> user = userService.findUserById(id);
-                return ResponseEntity.ok(user.orElseThrow(()
-                        -> new RuntimeException("User whit ID not found")));
+    @GetMapping("/signup")
+    public String signUp(Model model){
+        model.addAttribute("user", new User());
+    return "signUp";
     }
-=======
+
+    @GetMapping("/signUpConfirm")
+    public String signUpConfirm(@ModelAttribute User user, Model model) {
+        model.addAttribute("user",user);
+        return "signUpConfirm";
+    }
 //    @GetMapping("/id")
 //    public ResponseEntity<User> findUserById(@PathVariable Long id){
 //        User user = userService.findUserById(Long id);
 //                return ResponseEntity.ok(user);
 //    }
->>>>>>> b4d8b1a360012783ee10b0643241cbb880fe64bf
 
 
     @DeleteMapping("/id")

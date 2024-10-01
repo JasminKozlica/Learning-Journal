@@ -5,9 +5,13 @@
   <title>Sign In</title>
 </head>
 <body>
-<form th:object="${user}" th:action="@{/signin}" method="get">
-  input type="text" th:field="*{username}" placeholder="Username">
-    input type="password" th:field="*{password}" placeholder="Password">
+<h1>Sing in Page</h1>
+<form th:object="${user}" th:action="@{/users/signin}" method="get">
+
+  <input type="text" th:field="*{username}" placeholder="Username">
+
+    <input type="password" th:field="*{password}" placeholder="Password">
+
     <button type="submit">Sign In</button>
 </form>
 

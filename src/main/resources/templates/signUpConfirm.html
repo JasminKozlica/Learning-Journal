@@ -6,7 +6,9 @@
 </head>
 <body>
 <h1>you have successfully been registered</h1>
-
-<a th:href="*{/}">Go to your Jornal</a>
+<form>
+<a th:href="@{/journals}" methode="get">Go to your Jornal</a>
+    <button type="submit"></button>
+</form>
 </body>
 </html>

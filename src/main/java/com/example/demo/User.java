@@ -21,15 +21,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "email")
     private String email;
 //    @Column(name = "feedback")
 //    private String feedback;
-    @Column(name = "userrole")
+    @Column(name = "userrole",nullable = false)
     @Enumerated(EnumType.STRING)
     private RoleName role;
 

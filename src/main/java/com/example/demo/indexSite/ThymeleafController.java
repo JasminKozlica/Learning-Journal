@@ -25,6 +25,7 @@ public class ThymeleafController {
         journalService.insertEntry(journal);
         model.addAttribute("journal", journal);
         return "confirmation";
+
     }
 
     @GetMapping("/journals") // /journals
@@ -41,7 +42,7 @@ public class ThymeleafController {
     }
 
     @PutMapping("/journals/{id}") // /journals/{id}
-    public String updateEntry(@PathVariable Long id, @ModelAttribute Journal updatedJournal, Model model){
+    public String updateEntry(@PathVariable("id") Long id, @ModelAttribute Journal updatedJournal){
         journalService.updateJournal(id,updatedJournal);
         return "redirect:/journals";
     }

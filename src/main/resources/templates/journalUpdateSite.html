@@ -4,34 +4,73 @@
     <meta charset="UTF-8">
     <title>Learning Journal</title>
     <style>
-        h1{
-
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        form {
+            margin: 20px 0;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            padding: 8px;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 400px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        a:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-<a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Go back</a>
+<a th:href="@{/journals}">Go back</a>
 <br>
 <form th:action="@{'/journals/' + ${journal.entryId}}" th:object="${journal}" th:method="put">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
+    <label for="category">Category</label>
+    <input type="text" id="category" th:field="*{category}" placeholder="Enter category">
 
-<label class="journalCategory"for="category"></label>
-<input type="text" id="category" th:field="*{category}" placeholder="Enter category">
+    <br/>
 
-<br/>
+    <label for="content">Content</label>
+    <input type="text" id="content" th:field="*{content}" placeholder="Enter content">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-<br>
-<label  for="content"></label>
-<input  type="text" id="content" th:field="*{content}" placeholder="Enter content">
-<br/>
-<br>
-<label class="journalClass" for="tags"></label>
-<br>
-<input type="text" id="tags" th:field="*{tags}" placeholder="Enter tags">
-<br/>
-<br>
-<section>
-  <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Submit</button>
-</section>
+    <br/>
+
+    <label for="tags">Tags</label>
+    <input type="text" id="tags" th:field="*{tags}" placeholder="Enter tags">
+
+    <br/>
+
+    <section>
+        <button type="submit">Submit</button>
+    </section>
+</form>
 </body>
 </html>

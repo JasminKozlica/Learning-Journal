@@ -30,6 +30,7 @@ public class JournalService {
         return journalRepository.findById(entryId)
                 .map(journal -> {
                     journal.setCategory(updatedJournal.getCategory());
+                    journal.setContent(updatedJournal.getContent());
                     journal.setDate(updatedJournal.getDate());
                     journal.setTags(updatedJournal.getTags());
                     return journalRepository.save(journal);
