@@ -34,7 +34,7 @@ public class UserService  {
 //        Role adminRole = roleRepository.findByRoleName(RoleName.ROLE_ADMIN)
 //                .orElseThrow(() ->  new RuntimeException("Role Admin not found"));
 
-//        user.setRole(RoleName.ROLE_STUDENT);
+    //     user.setRole(RoleName.ROLE_STUDENT);
 
         return userRepository.save(user);
 

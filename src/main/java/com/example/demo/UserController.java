@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 @AllArgsConstructor
@@ -37,8 +37,9 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> findUserById(@PathVariable Long id){
 
-        User user = userService.findUserById(Long id);
-                return ResponseEntity.ok(user);
+        Optional<User> user = userService.findUserById(id);
+                return ResponseEntity.ok(user.orElseThrow(()
+                        -> new RuntimeException("User whit ID not found")));
     }
 
 
