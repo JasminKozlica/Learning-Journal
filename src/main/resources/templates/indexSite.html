@@ -17,77 +17,29 @@
 
     <label for="category"></label>
     <input type="text" class="category" id="category" th:field="*{category}" placeholder="Enter category">
-
-    <div class="editor-container">
-        <div id="toolbar">
-            <!-- Formatierungsbuttons -->
-            <div class="group">
-                <button class="icon-bold" onclick="execCmd(event, 'bold')" title="Fett"></button>
-                <button class="icon-italic" onclick="execCmd(event, 'italic')" title="Kursiv"></button>
-                <button class="icon-underline" onclick="execCmd(event, 'underline')" title="Unterstreichen"></button>
-                <button class="icon-strikethrough" onclick="execCmd(event, 'strikeThrough')" title="Durchgestrichen"></button>
-            </div>
-            <!-- Listen und Ausrichtung -->
-            <div class="group">
-                <button class="icon-orderedlist" onclick="execCmd(event, 'insertOrderedList')" title="Nummerierte Liste"></button>
-                <button class="icon-unorderedlist" onclick="execCmd(event, 'insertUnorderedList')" title="Aufzählung"></button>
-            </div>
-            <!-- Text-Ausrichtung -->
-            <div class="group">
-                <button class="icon-alignleft" onclick="execCmd(event, 'justifyLeft')" title="Linksbündig"></button>
-                <button class="icon-aligncenter" onclick="execCmd(event, 'justifyCenter')" title="Zentriert"></button>
-                <button class="icon-alignright" onclick="execCmd(event, 'justifyRight')" title="Rechtsbündig"></button>
-            </div>
-            <!-- Schriftgröße und Farbe -->
-            <div class="group">
-                <select onchange="execCmdArg('fontSize', this.value)">
-                    <option value="1">Schriftgröße 1</option>
-                    <option value="2">Schriftgröße 2</option>
-                    <option value="3" selected>Schriftgröße 3</option>
-                    <option value="4">Schriftgröße 4</option>
-                    <option value="5">Schriftgröße 5</option>
-                    <option value="6">Schriftgröße 6</option>
-                    <option value="7">Schriftgröße 7</option>
-                </select>
-                <input type="color" onchange="execCmdArg('foreColor', this.value)" title="Textfarbe ändern">
-            </div>
-            <!-- Rückgängig/Wiederholen -->
-            <div class="group">
-                <button class="icon-undo" onclick="execCmd(event, 'undo')" title="Rückgängig"></button>
-                <button class="icon-redo" onclick="execCmd(event, 'redo')" title="Wiederholen"></button>
-            </div>
-        </div>
-
-        <div id="editor" contenteditable="true">
-            Hier kannst du Text eingeben und formatieren...
-        </div>
-    </div>
+    <label for="content"></label>
+    <input type="text" style="background-color: white; height: 200px;" class="tags" id="content"  th:field="*{content}"  placeholder="Hier kannst du Text eingeben und formatieren...">
 
     <label for="tags"></label>
     <input type="text" class="tags" id="tags" th:field="*{tags}" placeholder="Enter tags">
 
     <section>
-        <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Submit</button>
+        <br>
+        <button type="submit" class="butt">Submit</button>
+        <a th:href="@{/journals}" class="butt">
+            Go to all your Journal Entries
+        </a>
     </section>
 
 </form>
-<section>
-    <br>
-    <a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
-        Go to all your Journal Entries
-    </a>
-</section>
+<!--<section>-->
+<!--    <br>-->
+<!--    <a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">-->
+<!--        Go to all your Journal Entries-->
+<!--    </a>-->
+<!--</section>-->
 
-<script>
-    function execCmd(event, command) {
-        event.preventDefault(); // Verhindert das Absenden des Formulars
-        document.execCommand(command, false, null);
-    }
 
-    function execCmdArg(command, arg) {
-        document.execCommand(command, false, arg);
-    }
-</script>
 
 </body>
 </html>
