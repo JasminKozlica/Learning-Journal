@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+<form th:object="${user}" th:action="@{/signup}" method="post">
+
+    <label for="username">Username:</label>
+    <input type="text" class="username" id="username" th:field="*{username}" placeholder="Enter username">
+
+    <label for="password">Password:</label>
+    <input type="password" class="password" id="password" th:field="*{password}" placeholder="Enter password">
+
+
+
+    <label for="email">Email:>
+
+        <input type="text" class="email" id="email" th:field="*{email}" placeholder="Enter email"></label>
+        <br>
+        <label for="role">Role:</label>
+        <select id="role" th:field="*{role}">
+            <option th:each="role : ${T(com.example.RoleName).values()}"
+                    th:value="${role}" th:text="${role}">Role</option>
+        </select>
+   <br>
+        <button type="submit">Sign Up></button>
+    <a th:href="@{/signUpConfirm}" class="butt">
+</form>
+</body>
+</html>
