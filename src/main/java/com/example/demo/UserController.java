@@ -3,6 +3,7 @@ package com.example.demo;
 
 import com.example.demo.dto.UserDto;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/users")
 public class UserController {
+    @Autowired
     private  UserService userService;
 
     @PostMapping("/create")
@@ -21,9 +23,8 @@ public class UserController {
         return "redirect:/users/signUpConfirm";
     }
 
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     public ResponseEntity<List<User>> findAll(){
-
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
@@ -31,7 +32,7 @@ public class UserController {
     @GetMapping("/signup")
     public String signUp(Model model){
         model.addAttribute("user", new User());
-    return "signUp";
+        return "signUp";
     }
 
     @GetMapping("/signUpConfirm")

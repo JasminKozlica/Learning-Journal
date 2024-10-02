@@ -1,5 +1,6 @@
 package com.example.demo.indexSite;
 
+import com.example.demo.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,5 +26,9 @@ public class Journal{
     private String category;
     @Column(name = "tags")
     private String tags;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
 }

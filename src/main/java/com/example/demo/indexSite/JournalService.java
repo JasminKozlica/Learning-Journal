@@ -1,5 +1,6 @@
 package com.example.demo.indexSite;
 
+import com.example.demo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,9 @@ public class JournalService {
     public List<Journal> getAllJournalEntries() {
         return journalRepository.findAll();
     }   // Read
-
+    public List<Journal> getAllJournalEntriesByUser(User user) {
+        return journalRepository.findByUser(user);
+    }
     public Journal updateJournal(Long entryId, Journal updatedJournal) {                 //Update
         return journalRepository.findById(entryId)
                 .map(journal -> {

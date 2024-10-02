@@ -8,6 +8,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,6 +28,9 @@ public class WebSecurityConfig {
      @Autowired
     private UserRepository userRepository;
 
+     @Autowired
+     private CustomUserDetailsService customUserDetailsService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -34,11 +38,9 @@ public class WebSecurityConfig {
 
         // die Reihenfolge der folgenden Zeilen innerhalb von authorizeHttpRequests ist sehr wichtig. Was zuerst kommt, wird nicht mehr überschrieben. D.h. wenn man in der ersten Zeile den Zugang zu bestimmten Seiten ermöglicht oder verbietet, dann wird das keine der kommenden Zeilen mehr ändern können.
         http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/welcome").permitAll() // der Pfad "/welcome" ist für alle erlaubt, auch für nicht-eingeloggte User
-                .requestMatchers("/welcome/**").permitAll() // alle Pfade, die mit "/welcome" anfangen, sind für alle erlaubt, auch für nicht-eingeloggte User
-                .requestMatchers("/manage/**").hasRole("ADMIN") // alle Pfade, die mit "/manage" anfangen, sind nur für User mit Rolle "ADMIN" erreichbar
-                .requestMatchers("/manage/**").hasAnyRole("ADMIN", "TEACHER") // alle Pfade, die mit "/manage" anfangen, sind nur für User mit Rolle "ADMIN" oder "TEACHER" erreichbar
-                .anyRequest().permitAll() // alle anderen Pfade sind nur mit erfolgreichem Login erreichbar
+                .anyRequest().authenticated() // der Pfad "/welcome" ist für alle erlaubt, auch für nicht-eingeloggte User
+//                .requestMatchers("/users/**").hasRole("ADMIN") // alle Pfade, die mit "/manage" anfangen, sind nur für User mit Rolle "ADMIN" erreichbar
+//                .requestMatchers("/manage/**").hasAnyRole("ADMIN", "TEACHER") // alle Pfade, die mit "/manage" anfangen, sind nur für User mit Rolle "ADMIN" oder "TEACHER" erreichbar
         );
 
         // erstellt eine Standard-Login-Seite (im Bootstrap-Design) unter dem Pfad "/login" und leitet nicht-eingeloggte User, die sich einloggen müssen, automatisch dorthin. Außerdem hat diese Seite eine rote Meldung bei fehlgeschlagenen Logins. Zusätzlich gibt es durch diese Zeile unter dem Pfad "/logout" eine Seite mit einem Knopf zum ausloggen. Vorsicht!: dieser Logout-Knopf leitet zwar wieder zu "/login", aber der User ist noch nicht wirklich ausgeloggt. Für diese Funktionalität braucht man noch die Zeile http.logout(configurer -> configurer.invalidateHttpSession(true));
@@ -58,46 +60,6 @@ public class WebSecurityConfig {
         http.logout(configurer -> configurer.invalidateHttpSession(true));
 
         return http.build();
-    }
-
-    // im folgenden Code erstellen wir hardgecoded zwei User. Einen mit Rolle "USER" und einen mit Rolle "ADMIN", jeweils mit passendem Username und Passwort. Die Rollenbezeichnungen können wir beliebig wählen. Hier können wir zum Rumprobieren User erstellen. Bei einem echten Projekt müssten wir diese Infos in einer Datenbank speichern.
-    @Bean
-    public UserDetailsService userDetailsService() {
-        List<com.example.demo.User> allUsers = userRepository.findAll();
-        Collection<UserDetails> allSpringUser = new ArrayList<>();
-        for (com.example.demo.User user:allUsers
-             ) {
-            System.out.println(user.toString());
-            UserDetails value = User
-                .withUsername(user.getUsername())
-                .password(passwordEncoder().encode(user.getPassword()))
-                .roles(RoleName.ROLE_ADMIN.equals(user.getRole().toString())?"ADMIN":"USER")
-                .build();
-            allSpringUser.add(value);
-        }
-//        UserDetails user = User
-//                .withUsername("Jasmin")
-//                .password(passwordEncoder().encode("joe"))
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails admin = User
-//                .withUsername("admin")
-//                .password(passwordEncoder().encode("admin"))
-//                .roles("ADMIN")
-//                .build();
-//        UserDetails user1 = User
-//                .withUsername("Nikola")
-//                .password(passwordEncoder().encode("beogradjanin"))
-//                .roles("USER")
-//                .build();
-//        UserDetails user2 = User
-//                .withUsername("Joe")
-//                .password(passwordEncoder().encode("joe"))
-//                .roles("USER")
-//                .build();
-
-        return new InMemoryUserDetailsManager(allSpringUser);
     }
 
     // das brauchen wir auch noch, damit die Passwörter ordentlich gehasht werden beim Erstellen und beim Login

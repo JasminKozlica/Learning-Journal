@@ -1,9 +1,14 @@
 package com.example.demo.indexSite;
 
+import com.example.demo.CustomUserPrincipal;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.util.List;
 
 @Controller
@@ -21,7 +26,8 @@ public class ThymeleafController {
     }
 
     @PostMapping("/")
-    public String submitJournalForm(@ModelAttribute Journal journal, Model model) {
+    public String submitJournalForm(@ModelAttribute Journal journal, Model model, @AuthenticationPrincipal CustomUserPrincipal principal) {
+        journal.setUser(principal.getUser());
         journalService.insertEntry(journal);
         model.addAttribute("journal", journal);
         return "confirmation";
@@ -29,8 +35,8 @@ public class ThymeleafController {
     }
 
     @GetMapping("/journals") // /journals
-    public String getAllJournals(Model model) {
-        List<Journal> journalEntries = journalService.getAllJournalEntries();
+    public String getAllJournals(Model model, @AuthenticationPrincipal CustomUserPrincipal principal) {
+        List<Journal> journalEntries = journalService.getAllJournalEntriesByUser(principal.getUser());
         model.addAttribute("journals", journalEntries);
         return "allJournalEntries";
     }
