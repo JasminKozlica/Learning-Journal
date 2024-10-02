@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{conf.css}">
     <title>Journal Submitted</title>
 </head>
 <body>
+<div class="vertical-line"></div> <!-- Vertical line on the left side -->
+
 <h1>Journal Entry Submitted</h1>
 
 <p>Your journal entry has been successfully submitted!</p>
 
-<p>Category: <span th:text="${journal.category}"></span></p>
-<p>Content: <span th:text="${journal.content}"></span></p>
-<p>Tags: <span th:text="${journal.tags}"></span></p>
+<table>
+    <tr>
+        <th>Category</th>
+        <td><span th:text="${journal.category}"></span></td>
+    </tr>
+    <tr>
+        <th>Content</th>
+        <td><span th:text="${journal.content}"></span></td>
+    </tr>
+    <tr>
+        <th>Tags</th>
+        <td><span th:text="${journal.tags}"></span></td>
+    </tr>
+</table>
 
-<form th:action="@{/}" method="get">
-    <button type="Back">Make new Journal </button>
-</form>
-<!--<a th:href="@{/journals}">Here you can see all your Journal Entries</a>-->
-<form th:action="@{/journals}" method="get">
-    <button type="submit">Go to all your Journal Entries</button>
-</form>
+<div class="button-container">
+    <form th:action="@{/}" method="get">
+        <button type="submit">Make New Journal</button>
+    </form>
+
+    <form th:action="@{/journals}" method="get">
+        <button type="submit">Go to All Your Journal Entries</button>
+    </form>
+</div>
 
 </body>
 </html>
+

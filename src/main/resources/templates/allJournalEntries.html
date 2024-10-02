@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../static/Styles.css">
+    <link rel="stylesheet" th:href="@{Styles.css}">
     <title>All Journal Entries</title>
+    <style>
+
+    </style>
 </head>
 <body>
+<div class="vertical-line"></div>
 <header>
     <h1 class="titel-text">On this Page You can see all Your Journal Entries </h1>
 </header>
 <h1>All Journal Entries</h1>
 <br>
-<a th:href="@{/}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+<a th:href="@{/}">
     Make new Journal
 </a>
 <br>
 <br>
-<table border="1">
+<table>
     <thead>
     <tr>
         <th>ID</th>
@@ -48,8 +52,6 @@
     </tbody>
 
 </table>
-<!--<a th:href="@{/}">Go back to Journal page</a>   <&#45;&#45; TODO button für new entry,verbindung mit html.Es sollte am top sein &ndash;&gt;-->
+
 </body>
 </html>
-<!-- TODO Link für delete Journal "/deleteJournalEntry" -->
-<!-- TODO Link für update Journal "/updateJournalEntry/{id}" -->

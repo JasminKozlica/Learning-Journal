@@ -1,0 +1,72 @@
+body {
+    background: url('https://img.freepik.com/free-vector/gradient-technology-futuristic-background_23-2149131656.jpg?ga=GA1.1.720883095.1727208564&semt=ais_hybrid') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+table {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    text-align: center;
+    min-height: 100px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+    position: relative;
+}
+
+td, th {
+    padding: 10px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.button-container {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px; /* Add horizontal spacing between buttons */
+    height: 50px;
+    flex: 1; /* Allow buttons to grow equally */
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+.vertical-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    background-color: rgba(138, 43, 226, 0.5);
+    z-index: 1;
+    height: 100%;
+    min-height: 100vh;
+}

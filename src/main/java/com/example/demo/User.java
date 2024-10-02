@@ -3,10 +3,7 @@ package com.example.demo;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.context.annotation.Role;
 
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "appuser")
@@ -27,8 +24,7 @@ public class User {
     private String password;
     @Column(name = "email")
     private String email;
-//    @Column(name = "feedback")
-//    private String feedback;
+
     @Column(name = "userrole")
     @Enumerated(EnumType.STRING)
     private RoleName role;

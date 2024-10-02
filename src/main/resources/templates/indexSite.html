@@ -2,14 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Learning Journal</title>
-    <link rel="stylesheet" href="Styles.css">
     <link rel="stylesheet" th:href="@{indexSite.css}">
+    <title> Digital Learning Journal</title>
+    <style>
+
+    </style>
 </head>
 <body class="centeraligned">
 <header>
     <div>
-        <img src="https://quickerthanthoughtortime.wordpress.com/wp-content/uploads/2018/10/journal.jpg" class="titel-image" alt="Random cover photo/photo change pending">
+        <h1 class="titel-text">Digital Learning Journal</h1>
+        <img src="https://img.freepik.com/premium-photo/book-with-neon-lights-it_1020200-17659.jpg?w=740" class="titel-image" alt="Placeholder Image">
     </div>
     <br>
 </header>
@@ -18,7 +21,7 @@
     <label for="category"></label>
     <input type="text" class="category" id="category" th:field="*{category}" placeholder="Enter category">
     <label for="content"></label>
-    <input type="text" style="background-color: white; height: 200px;" class="tags" id="content"  th:field="*{content}"  placeholder="Hier kannst du Text eingeben und formatieren...">
+    <input type="text" class="tags" id="content"  th:field="*{content}"  placeholder="You can write something...">
 
     <label for="tags"></label>
     <input type="text" class="tags" id="tags" th:field="*{tags}" placeholder="Enter tags">
@@ -32,14 +35,5 @@
     </section>
 
 </form>
-<!--<section>-->
-<!--    <br>-->
-<!--    <a th:href="@{/journals}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">-->
-<!--        Go to all your Journal Entries-->
-<!--    </a>-->
-<!--</section>-->
-
-
-
 </body>
 </html>
